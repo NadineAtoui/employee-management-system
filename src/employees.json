@@ -1,0 +1,24 @@
+{
+  "employees": [
+    {
+      "name": "Alice",
+      "supervisor": "Bob"
+    },
+    {
+      "name": "Bob",
+      "supervisor": "Charlie"
+    },
+    {
+      "name": "Charlie",
+      "supervisor": "David"
+    },
+    {
+      "name": "David",
+      "supervisor": null
+    },
+    {
+      "name": "Eve",
+      "supervisor": "Bob"
+    }
+  ]
+}

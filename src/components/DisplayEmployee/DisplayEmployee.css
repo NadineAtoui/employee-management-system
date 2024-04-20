@@ -1,0 +1,29 @@
+.employee-tree {
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.employee-node {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.employee-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.employee-name {
+  font-weight: bold;
+}
+
+.employee-position {
+  color: #666;
+}
+
+.direct-reports {
+  margin-left: 20px;
+}
