@@ -7,7 +7,6 @@ const EmployeeForm = ({ onSubmit, employees }) => {
   const [error, setError] = useState('');
   const [validSupervisors, setValidSupervisors] = useState([]);
 
-  // Update valid supervisors whenever employees list changes
   useEffect(() => {
     const supervisorOptions = employees.map(emp => emp.name);
     setValidSupervisors(supervisorOptions);
@@ -16,7 +15,6 @@ const EmployeeForm = ({ onSubmit, employees }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
   
-    // Validate form inputs
     if (!name.trim()) {
       setError('Employee name cannot be empty');
       return;
@@ -25,7 +23,6 @@ const EmployeeForm = ({ onSubmit, employees }) => {
     const existingEmployee = employees.find(emp => emp.name === name.trim());
   
     if (existingEmployee) {
-      // Assign supervisor to an existing employee
       if (!supervisor.trim()) {
         setError('Please select a supervisor for the existing employee');
         return;
@@ -36,63 +33,53 @@ const EmployeeForm = ({ onSubmit, employees }) => {
         return;
       }
   
-      // Check for hierarchy constraints
       if (checkHierarchyConstraint(existingEmployee.name, supervisor)) {
         setError('An employee cannot be the supervisor of their own supervisor');
         return;
       }
   
-      // Prepare updated employee object
       const updatedEmployee = {
         ...existingEmployee,
         supervisor: supervisor.trim(),
       };
   
-      // Submit updated employee data
       onSubmit(updatedEmployee);
     } else {
-      // Add new employee
       if (supervisor.trim() && !validSupervisors.includes(supervisor)) {
         setError('Please select a valid supervisor from the list');
         return;
       }
   
-      // Prepare new employee object
       const newEmployee = {
         name: name.trim(),
         supervisor: supervisor.trim() || null,
       };
   
-      // Submit new employee data
       onSubmit(newEmployee);
     }
   
-    // Clear form fields and reset error state
     setName('');
     setSupervisor('');
     setError('');
   };
   
-  // Helper function to check hierarchy constraints
   const checkHierarchyConstraint = (employeeName, supervisorName) => {
     let currentSupervisor = supervisorName;
   
-    // Traverse up the hierarchy starting from the selected supervisor
     while (currentSupervisor) {
       if (currentSupervisor === employeeName) {
-        return true; // Hierarchy constraint violated
+        return true; 
       }
   
-      // Find the supervisor of the current supervisor
       const supervisorEmployee = employees.find(emp => emp.name === currentSupervisor);
       if (!supervisorEmployee) {
-        break; // Supervisor not found (shouldn't happen in valid data)
+        break; 
       }
   
       currentSupervisor = supervisorEmployee.supervisor;
     }
   
-    return false; // Hierarchy constraint satisfied
+    return false; 
   };
 
   return (
@@ -123,7 +110,6 @@ const EmployeeForm = ({ onSubmit, employees }) => {
           </select>
         </label>
         <button type="submit">
-          {/* {existingEmployee ? 'Assign Supervisor' : 'Add Employee'} */}
           submit
         </button>
       </form>

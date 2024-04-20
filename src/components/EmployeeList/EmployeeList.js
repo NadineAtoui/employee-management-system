@@ -9,7 +9,6 @@ const EmployeeList = ({ employees, onDelete }) => {
     onDelete(employee);
   };
 
-  // Filter employees based on the search term
   const filteredEmployees = employees.filter((employee) =>
     employee.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
